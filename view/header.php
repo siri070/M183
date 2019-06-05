@@ -34,7 +34,7 @@
               $uid = $_SESSION['uid']?>
               <li><a href="<?=$GLOBALS['appurl']?>/login/logout?uid=<?= $uid?>">Logout</a></li>
               <li><a href="<?=$GLOBALS['appurl']?>/login/userdata?uid=<?= $uid?>">Benutzerdaten</a></li>
-              <li><a href="<?=$GLOBALS['appurl']?>/galleries?uid=<?= $uid?>">Meine Galerien</a></li>
+              <li><a href="<?=$GLOBALS['appurl']?>/blog?uid=<?= $uid?>">Meine Galerien</a></li>
               <?php } else { ?>
                   <li><a href="<?=$GLOBALS['appurl']?>/login">Login</a></li>
                   <li><a href="<?=$GLOBALS['appurl']?>/login/registration">Registration</a></li>

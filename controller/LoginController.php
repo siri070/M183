@@ -1,6 +1,6 @@
 <?php
 require_once '../repository/LoginRepository.php';
-
+require_once '../controller/BlogController.php';
 require_once '../controller/DefaultController.php';
 require_once '../lib/Validation.php';
 require_once '../lib/Functions.php';
@@ -348,7 +348,7 @@ class LoginController
         unset($_SESSION['errors']);
         $_SESSION['uid'] = htmlspecialchars($user->id);
 
-        header("Location: ".$GLOBALS['appurl'].'/galleries');
+        header("Location: ".$GLOBALS['appurl'].'/blog');
     }
 
     //damit sich der User ausloggen kann

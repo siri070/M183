@@ -3,7 +3,7 @@
 
 	  </div>
 	  <footer >
-		<p>&copy; Copyright gibb Michael Abplanalp, Iris Burkhalter, Nicole Widmer </p>
+		<p>&copy; Copyright gibb Iris Burkhalter, Vithursiya Vijayasingam </p>
 	  </footer>
 	</div>
   </body>
