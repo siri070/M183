@@ -31,41 +31,14 @@ class LoginRepository extends Repository
         return $statement->insert_id;
     }
 
-    public function makeUserVisible($isVisible, $uid)
-    {
-        $query = "UPDATE {$this->tableName} SET IsUserVisible = ? WHERE id = ?";
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ii',$isVisible,$uid);
-        $statement->execute();
-        if(!$statement->execute()) {
-            throw new Exception($statement->error);
-        }
-    }
-
-    public function updateUserData($newnickname, $newmailAdresse, $newpasswort, $uid)
-    {
-        $password = password_hash($newpasswort,PASSWORD_DEFAULT);
-        echo "<br>";
-        var_dump($newnickname);
-        var_dump($newmailAdresse);
-        var_dump($newpasswort);
-        var_dump($uid);
-        $query = "UPDATE {$this->tableName} SET nickname = ? , mailAdresse = ? , passwort = ?  WHERE id = ?";
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('sssi', $newnickname, $newmailAdresse, $password, $uid);
-        if(!$statement->execute()) {
-            throw new Exception($statement->error);
-        }
-    }
-
     //User anhand seiner Email holen
-    public function getUser($email){
+    public function getUser($nickname){
         //Statement vorbereiten
-        $query = "SELECT * FROM {$this->tableName} WHERE mailAdresse = ? ";
+        $query = "SELECT * FROM {$this->tableName} WHERE nickname = ? ";
         //Statement vorbereiten
         $statement = ConnectionHandler::getConnection()->prepare($query);
         //Parameter andbinden
-        $statement->bind_param('s',$email);
+        $statement->bind_param('s',$nickname);
         //Ausführung und überprüfung ob es klappt
         if(!$statement->execute()){
             throw new Exception($statement->error);

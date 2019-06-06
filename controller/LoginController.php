@@ -42,15 +42,8 @@ class LoginController
 
         $view->textusername = $user->nickname;;
         $view->textemail = $user->mailAdresse;
-        $view->textvisibility = $user->IsUserVisible;
-        if($user->IsUserVisible == 0)
-        {
-            $text = "nicht sichtbar";
-        }
-        else{
-            $text = "sichtbar";
-        }
-        $view->sichtbarkeit =$text;
+
+
         $view->class = "disabled";
         $view->display();
     }
@@ -84,15 +77,7 @@ class LoginController
         $view->heading ="Persönliche Daten ändern";
 
         $view->textemail = $user->mailAdresse;
-        $view->textvisibility = $user->IsUserVisible;
-        if($user->IsUserVisible == 0)
-        {
-            $text = "nicht sichtbar";
-        }
-        else{
-            $text = "sichtbar";
-        }
-        $view->sichtbarkeit =$text;
+
         $view->display();
     }
 
@@ -298,10 +283,10 @@ class LoginController
         if ($_POST ['send']) {
             //Kontrolle ob der Benutzer etwas eingegeben hat
 
-            if (isset($_POST['email'])) {
-                $_POST['userdata']['email'] = htmlspecialchars($_POST['email']) ;
+            if (isset($_POST['nickname'])) {
+                $_POST['userdata']['nickname'] = htmlspecialchars($_POST['nickname']) ;
             } else {
-                $_SESSION['errors']="Geben sie ihre Email-Adresse ein.";
+                $_SESSION['errors']="Geben sie ihren Nickname ein.";
             }
             if (isset($_POST['passwort'])) {
 
@@ -311,7 +296,7 @@ class LoginController
             }
             $loginRepository = new LoginRepository();
             //holen der Userdaten aus der DB
-            $user = $loginRepository->getUser($_POST['userdata']['email']);
+            $user = $loginRepository->getUser($_POST['userdata']['nickname']);
             if(isset($user))
             {
                 $this->checkIsUserInputCorrect($user);
@@ -496,60 +481,5 @@ class LoginController
     }
 
 
-    public function delete()
-    {
 
-        $loginRepository = new LoginRepository();
-        if($this->deleteAllGalleries())
-        {
-            $oldID =$_SESSION['uid'];
-            $loginRepository->deleteById($_SESSION['uid']);
-            if($loginRepository->readById($oldID)==null)
-            {
-                rmdir("../public".$GLOBALS['urlAllUser'].$_SESSION['uid']);
-                //$_SESSION['accompolishment']="Löschung erfolgt";
-                $this->afterDelete();
-            }
-        }
-        else{
-            //$_SESSION['errors']="Es hat ein Problem beim Löschen des Userprofils gegeben. Kontaktiere den Webhoster.";
-            $this->afterDelete();
-
-        }
-    }
-
-    public function afterDelete()
-    {
-        session_unset();
-        session_destroy();
-        header("Location:".$GLOBALS['appurl']);
-    }
-    public function deleteAllGalleries()
-    {
-        $gallerieController = new GalleriesController();
-        $gallerieRepository = new GalleryRepository();
-
-        $galleriesFromUser=$gallerieRepository->getGalerieByUser($_GET['uid']);
-        if(empty($galleriesFromUser)|| $galleriesFromUser== null ){
-            $isRemoved=true;
-        }
-        else{
-            foreach($galleriesFromUser as $gallerie)
-            {
-                $oldGallerieName= $gallerie->GalerieName;
-                $gallerieController->deleteGallerie($gallerie->id);
-                if(!file_exists($GLOBALS['appurl'].$GLOBALS['urlAllUser'].$_SESSION['uid']."/".$oldGallerieName))
-                {
-                    $isRemoved = true;
-                }
-                else{
-                    $isRemoved=false;
-                    return;
-                }
-            }
-        }
-
-
-        return $isRemoved;
-    }
 }

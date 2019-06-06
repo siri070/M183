@@ -34,7 +34,7 @@ class Validation
         $special = preg_match("#[{$pattern}]#", $password); // false
         if(!$uppercase)
         {
-            $isValid = false;;
+            $isValid = false;
             $_SESSION['errors']="Passwort muss min. einen Grossbuchstaben enthalten!";
         }
         else{
@@ -56,13 +56,6 @@ class Validation
         else{
             $isValid = true;
         }
-        if(!$special)
-        {
-            $isValid = false;;
-            $_SESSION['errors']="Passwort muss min. ein Sonderzeichen enthalten!";
-        }else{
-            $isValid = true;
-        }
         return $isValid;
 
     }
@@ -80,16 +73,6 @@ class Validation
     }
 
 
-    public function checkExtension($extension)
-    {
-        if ($extension!=='jpeg' || $extension!=='png' || $extension !== 'jpg')
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
 
 }

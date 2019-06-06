@@ -7,26 +7,12 @@
             <?php
 
             $makeVisible = new Form($GLOBALS['appurl']."/login/saveUpdatedUserdata", null ,$confirm);
-            if($textvisibility == 0)
-            {
-                echo '<label>Für andere User sichtbar machen:</label>';
-                $label = "Sichtbar machen";
-            }
-            else if ($textvisibility == 1)
-            {
-                echo '<label>Für andere User ausblenden:</label>';
-                $label = "Verstecken";
-            }
-            else
-            {
-                $label= "Keine Ahnung";
-            }
+
             $_POST['userdata']['username'] = $textusername;
             $_POST['userdata']['email'] = $textemail;
-            echo $makeVisible->submit()->label($label)->name('makeVisibe');
+
             echo '</div>';
             echo '</form>';
-            echo '<h6>(Bist du für andere User nicht sichtbar, kannst du im Gegenzug auch nicht nach anderen Usern suchen) </h6>';
 
             $form = new Form($GLOBALS ['appurl']."/login/saveUpdatedUserdata", null , $confirm );
 
@@ -40,9 +26,6 @@
             echo '</div>';
             echo '</form>';
 
-            $delete = new Form($GLOBALS ['appurl']."/login/delete/index?uid=".$userid, null, $confirmdel);
-            echo $delete->submit()->label('Ganzes Profil löschen')->name('delete');
-            echo '<h6 class="text-danger">(Achtung: Löschen kann nicht rückgängig gemacht werden und löscht deine Bilder sowie dein Profil unwiederruflich!) </h6>';
             echo '</div>';
             echo '</form>';
             ?>

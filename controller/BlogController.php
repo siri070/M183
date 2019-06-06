@@ -11,11 +11,13 @@ class BlogController
 {
     public function index()
     {
+        $blogRepository= new BlogRepository();
         $view = new View("blog_index");
         $view->title = "Blog";
         $view->confirm = "";
         $view->menuTitle = "Blog";
         $view->heading = "Blog";
+        $view->allBlogEntries= $blogRepository->getBlogByUID($_SESSION['uid']);
         if(isset($_POST['userdata']['email'])&&$_POST['userdata']['username'])
         {
             $view->text = $_POST['userdata'];
@@ -44,13 +46,5 @@ class BlogController
 
         }
     }
-    public function view_updateBlogEntry(){
 
-    }
-    public function updateBlogEntry(){
-
-    }
-    public function deleteBlogEntry(){
-
-    }
 }

@@ -6,7 +6,7 @@
 
             <?php
             $form = new Form($GLOBALS ['appurl']."/login/login", null , $confirm);
-            echo $form->email()->label('Mail')->name('email');
+            echo $form->textarea()->label('User')->name('nickname');
             echo $form->password()->label('Passwort')->name('passwort');
             echo $form->submit()->label('Login')->name('send');
             echo '</div>';

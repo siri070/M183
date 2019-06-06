@@ -13,7 +13,7 @@
 
             $form = new Form($GLOBALS ['appurl']."/login/register" , null, $confirm);
 
-            echo $form->textarea()->label('Nickname')->name('nickname');
+            echo $form->textarea()->label('User')->name('nickname');
             if(isset($text))
             {
                 echo $form->email()->label('Mail')->name('email')->value($text['email']);
