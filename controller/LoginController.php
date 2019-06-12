@@ -125,6 +125,8 @@ class LoginController
         //Überprüfung ob das richtige Passwort eingegeben wurde
         if (!(password_verify($_POST['userdata']['passwort'], $user->passwort))) {
             $_SESSION['errors']="Sie haben das falsche Passwort eingegeben.";
+            $InfoLog= "\n Login-Error \n   User: ".$user->nickname."\n   Id:".$user->id."\n Datum & Uhrzeit:";
+            file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         }
         else
         {
@@ -137,16 +139,18 @@ class LoginController
         unset($_SESSION['errors']);
         $_SESSION['uid'] = htmlspecialchars($user->id);
         $_SESSION['user']= htmlspecialchars($user->nickname);
-
+        $InfoLog= "\nLogin \n   User: ".$user->nickname." \n   Id:".$user->id."\n   Datum & Uhrzeit";
+        file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         header("Location: ".$GLOBALS['appurl'].'/blog');
     }
 
     //damit sich der User ausloggen kann
     public function logout()
     {
+        $InfoLog= "\nLogout \n   User: ".$_POST['userdata']['nickname']."\n   Id:".$_SESSION['uid']."\n   Datum & Uhrzeit:";
+        file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         session_unset();
         session_destroy();
-        $galerie = new DefaultController();
         header("Location:".$GLOBALS['appurl']);
     }
 
@@ -205,13 +209,11 @@ class LoginController
 
                 $loginRepository->create($nickname, $email, $passwort);
                 unset($_SESSION['errors']);
+                $InfoLog= "\nRegistration \n   User:".$nickname."\n   E-Mail:".$email."\n   Datum & Uhrzeit:";
+                file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
                 //Weiterleitung zum Login wenn alles funktioniert hat
-                if(!empty($loginRepository->getUser($email)))
-                {
-                    $_SESSION['accompolishment']="Retistrierung erfolgreich";
-                    $loginController = new LoginController();
-                    $loginController->index();
-                }
+                $this->index();
+
             } else {
                 if ($nicknameDuplicate) {
 
@@ -244,6 +246,8 @@ class LoginController
                 $errorhandling = new Functions();
                 $_POST['userdata']['nickname'] = $nickname;
                 $_POST['userdata']['email'] = $email;
+                $InfoLog= "\nRegistrations-Error \n   E-Mail:".$_POST['userdata']['email']."\n   Datum & Uhrzeit:";
+                file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
                 $errorhandling->displayErrors($_SESSION['errors'], "/login/registration", $_POST['userdata']) ;
             }
         }

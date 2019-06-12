@@ -46,6 +46,8 @@ class BlogController
 
             if($isBlogTitelOk && $isBlogTextOk){
               $blogRepository->createBloGEntry($_POST['blog']['Titel'],$_POST['blog']['Text'],$_SESSION['uid']);
+                $InfoLog= "\nBlog-hinzugefügt \n   User-Id:".$_SESSION['uid']."\n   Titel:".$_POST['blog']['Titel']."\n   Datum & Uhrzeit:";
+                file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
               $this->index();
             }
             elseif(!$isBlogTitelOk){
