@@ -32,8 +32,8 @@
 		  <?php
           if (isset($_SESSION['uid'])) {
               $uid = $_SESSION['uid']?>
+              <li><a href="<?=$GLOBALS['appurl']?>/blog?uid=<?= $uid?>"><?= $_SESSION['user']?></a></li>
               <li><a href="<?=$GLOBALS['appurl']?>/login/logout?uid=<?= $uid?>">Logout</a></li>
-              <li><a href="<?=$GLOBALS['appurl']?>/login/userdata?uid=<?= $uid?>">Benutzerdaten</a></li>
               <li><a href="<?=$GLOBALS['appurl']?>/blog?uid=<?= $uid?>">Mein Blog</a></li>
               <?php } else { ?>
                   <li><a href="<?=$GLOBALS['appurl']?>/login">Login</a></li>
@@ -41,21 +41,6 @@
               <?php }
 
 			?>
-              <?php
-              if ((isset($_GET['gid']) && $_GET['gid'] > 0)&&!isset($_GET['bid'])&&isset($_SESSION['uid'])){
-                  $gid = $_GET['gid'];
-                  $uid = $_SESSION['uid'];
-                  ?>
-
-                  <?php
-              }
-              if ((isset($_GET['bid']) && $_GET['bid'] > 0)&&(isset($_GET['gid']) && $_GET['gid'] > 0)&&isset($_SESSION['uid'])){
-                  $gid = $_GET['gid'];
-                  $uid = $_SESSION['uid'];
-                  ?>
-
-                  <?php
-              }?>
 
           </ul>
         </div><!--/.nav-collapse -->

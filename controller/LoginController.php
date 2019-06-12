@@ -30,97 +30,6 @@ class LoginController
         $view->display();
     }
 
-    public function userdata()
-    {
-        $loginRepository = new LoginRepository();
-        $view = new View("userdata_index");
-        $user= $loginRepository->readById($_SESSION['uid']);
-        $view->confirm = "";
-        $view->title = "Deine Übersicht";
-        $view->menuTitle = "Bilder-DB";
-        $view->heading ="Übersicht über deine Daten";
-
-        $view->textusername = $user->nickname;;
-        $view->textemail = $user->mailAdresse;
-
-
-        $view->class = "disabled";
-        $view->display();
-    }
-
-    public function changeUserdataView()
-    {
-        $loginRepository = new LoginRepository();
-        $view = new View("userdata_update");
-        $user= $loginRepository->readById($_SESSION['uid']);
-        $view->confirm = "";
-        $view->confirmdel = "onsubmit=\"return confirm('Willst du dein ganzes Profil mit allen Daten löschen? Dieser Vorgang kann nicht rückgängig gemacht werden!')\"";
-        if(isset($_POST['userdata']['username']) && $_POST['userdata']['username']!=="" && htmlspecialchars($_POST['userdata']['username']) === $user->nickname)
-        {
-            $view->textusername = htmlspecialchars($_POST['userdata']['username']);
-        }
-        else
-        {
-            $view->textusername = $user->nickname;
-        }
-        if(isset($_POST['userdata']['email']) && $_POST['userdata']['email']!=="" && $_POST['userdata']['email'] === $user->mailAdresse)
-        {
-            $view->textemail = htmlspecialchars($_POST['userdata']['email']);
-        }
-        else
-        {
-            $view->textemail = $user->mailAdresse;
-        }
-        $view->userid = $user->id;
-        $view->title = "Einstellungen ändern";
-        $view->menuTitle = "Bilder-DB";
-        $view->heading ="Persönliche Daten ändern";
-
-        $view->textemail = $user->mailAdresse;
-
-        $view->display();
-    }
-
-
-    public function validateUserInputByUpdate($user)
-    {
-
-
-        if(isset($_POST['send']))
-        {
-            if(!isset($_POST['username'])||!isset($_POST['email'])||!isset($_POST['activePasswort'])||!isset($_POST['passwort1'])||!isset($_POST['passwort2']))
-            {
-
-                $_SESSION['errors']="Es müssen alle Felder ausgefüllt werden.";
-                return false;
-            }
-            else if(!$this->isPasswordCorrect($_POST['activePasswort'], $user) )
-            {
-                $_SESSION['errors']="Aktuelles Passwort nicht korrekt";
-
-                return false;
-            }
-            else if(!$this->comparePasswords(htmlspecialchars($_POST['passwort1']), htmlspecialchars($_POST['passwort2'])))
-            {
-                $_SESSION['errors']="Das neue Passwort und das Bestätigungspasswort stimmen nicht überien.";
-                return false;
-            }
-            else
-            {
-
-                return true;
-
-            }
-        }
-        else{
-            $_SESSION['errors']="Keine Berechtigung diese Methode aufzurufen.";
-            return false;
-        }
-    }
-
-
-
-
     public function areFieldsNotEmptyWhileRegistration()
     {
         if(!isset($_POST['username'])||
@@ -138,111 +47,6 @@ class LoginController
             return true;
         }
 
-    }
-//Methode um die Profilangaben die der User gerne ändern möchte zu validieren und zu speichern.
-    public function saveUpdatedUserdata()
-    {
-        $loginrepository = new LoginRepository();
-        $user = $loginrepository->readById(($_SESSION['uid']));
-        if(isset($_POST['makeVisibe']))
-        {
-            if($user->IsUserVisible === 0)
-            {
-                /**Ist der User nicht sichtbar, soll die Einstellung auf sichtbar gestellt werden.
-                 * @function makeUserVisible @param Sichtbarkeit und UserID
-                 **/
-                $loginrepository->makeUserVisible(1, $user->id);
-                //Die neuen userdaten werden geholt.
-                $user = $loginrepository->readById(($user->id));
-                /**
-                 * Die Einstellungen werden überprüft
-                 */
-                if($user->IsUserVisible === 1)
-                {
-                    //Sichtbar machen hat geklappt
-                    $_SESSION['accompolishment']="Änderung von Sichtbarkeit für andere User auf SICHTBAR hat geklappt";
-                    $this->changeUserdataView();
-                }//Sichtbar machen hat Nicht geklappt
-                else if($user->IsUserVisible === 0){
-                    $_SESSION['errors']="Änderung von Sichtbarkeit für andere User auf SICHTBAR hat NICHT geklappt";
-                    $this->changeUserdataView();
-                }
-                else
-                {
-                    $_SESSION['errors']="Es hat einen unbekannten Fehler gegeben. Bitte setzen sie sich mit dem Webhoster in Verbindeung";
-                    $this->userdata();
-                }
-            }
-            /**Ist der User gemäss seinen Einstellungen sichtbar, soll die Einstellung auf NICHT SICHTBAR gestellt werden.
-             * @function makeUserVisible @param Sichtbarkeit und UserID
-             **/
-            else if($user->IsUserVisible === 1){
-                $loginrepository->makeUserVisible(0, $user->id);
-                $user = $loginrepository->readById(($user->id));
-                /**
-                 * Die Einstellungen werden nochmals überprüft
-                 */
-                if($user->IsUserVisible === 0)
-                {
-                    $_SESSION['accompolishment']="Änderung von Sichtbarkeit für andere User auf NICHT sichtbar hat geklappt";
-                    $this->changeUserdataView();
-
-                }
-                else if($user->IsUserVisible === 1){
-                    $_SESSION['errors']="Änderung von Sichtbarkeit für andere User auf nicht sichtbar hat NICHT geklappt";
-                    $this->changeUserdataView();
-
-                }
-                else
-                {
-                    $_SESSION['errors']="Es hat einen unbekannten Fehler gegeben. Bitte setzen sie sich mit dem Webhoster in Verbindeung";
-                    $this->userdata();
-
-                }
-            }
-        }
-        else if(isset($_POST['send']))
-        {
-            /**
-             * Userinput wird geprüft
-             */
-
-            if($this->validateUserInputByUpdate($user))
-            {
-                $password = htmlspecialchars($_POST['passwort1']);
-                $username = htmlspecialchars($_POST['username']);
-                $email = htmlspecialchars($_POST['email']);
-                $loginrepository->updateUserData($username, $email,$password, (int)$user->id);
-               $updatedUser = $loginrepository->getUser($email);
-                if(!($updatedUser->mailAdresse == $email))
-                {
-                    $_SESSION['errors']="Beim Speichern der Email hat es einen Fehler gegeben.";
-                    $this->changeUserdataView();
-                }
-                else if(!$updatedUser->nickname == $username)
-                {
-                    $_SESSION['errors']="Beim Speichern des Usernamens hat es einen Fehler gegeben.";
-                    $this->changeUserdataView();
-                }
-                else if($this->isPasswordCorrect($updatedUser->passwort, $updatedUser))
-                {
-                    $_SESSION['errors']="Beim Speichern des Passwortes hat es einen Fehler gegeben.";
-                    $this->changeUserdataView();
-                }
-                else
-                {
-                    $_SESSION['accompolishment']="Update erfolgreich!";
-                    $this->changeUserdataView();
-                }
-            }
-            else{
-
-                $password = htmlspecialchars($_POST['passwort1']);
-                $username = htmlspecialchars($_POST['username']);
-                $email = htmlspecialchars($_POST['email']);
-               header("Location: ".$GLOBALS['appurl']."/login/userdata");
-            }
-        }
     }
 
     public function isPasswordCorrect($passwort, $user)
@@ -332,6 +136,7 @@ class LoginController
     {
         unset($_SESSION['errors']);
         $_SESSION['uid'] = htmlspecialchars($user->id);
+        $_SESSION['user']= htmlspecialchars($user->nickname);
 
         header("Location: ".$GLOBALS['appurl'].'/blog');
     }
@@ -373,7 +178,7 @@ class LoginController
     {
         $validation = new Validation();
         if ($_POST ['send']) {
-            $isNotEmpty =$this->areFieldsNotEmptyWhileRegistration();
+
             //Holen der Benutzereingabe und Validation
             $_POST['userdata']['nickname']=htmlspecialchars($_POST['nickname']);
             $nickname = htmlspecialchars($_POST['nickname']);
@@ -398,7 +203,7 @@ class LoginController
             //Überprüfung ob das Passwort zweimal gleich eingegeben wurde und ob die Validation fehlerfrei durchgelaufen ist.
             if ($_POST['userdata']['passwort'] === $_POST['userdata']['passwort2'] && $emailOK && $passwortOK && $nicknameOK && !$nicknameDuplicate && !$emailDuplicate && $passwordOKAndValid) {
 
-                $this->createUserProfile($loginRepository, $nickname, $email, $passwort);
+                $loginRepository->create($nickname, $email, $passwort);
                 unset($_SESSION['errors']);
                 //Weiterleitung zum Login wenn alles funktioniert hat
                 if(!empty($loginRepository->getUser($email)))
@@ -411,6 +216,10 @@ class LoginController
                 if ($nicknameDuplicate) {
 
                     $_SESSION['errors']= "Username nicht verfügbar, bitte wählen sie einen anderen Usernamen";
+                }
+                if (!$nicknameOK) {
+
+                    $_SESSION['errors']= "Username muss mindestens 3 Zeichen und maximal 25 Zeichen lang sein";
                 }
                 if ($emailDuplicate) {
 
@@ -439,17 +248,7 @@ class LoginController
             }
         }
     }
-
-
-    private function createUserProfile($loginRepository, $nickname, $email, $passwort)
-    {
-        $loginRepository->create($nickname, $email, $passwort);
-        $user= $loginRepository->getUser($email);
-        $pathname ="../public/AllUser/".$user->id."/";
-        mkdir($pathname,0777,true  );
-    }
-
-
+    /** überprüfung ob es diesen Nickname/Username schon gibt */
     public function isNicknameADublicate()
     {
         $loginRepository = new LoginRepository();
@@ -463,7 +262,7 @@ class LoginController
             return true;
         }
     }
-
+    /** überprüfung ob es diese Email schon gibt */
     public function isEmailADublicate()
     {
         $loginRepository = new LoginRepository();

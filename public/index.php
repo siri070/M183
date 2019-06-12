@@ -18,7 +18,6 @@ if(!isset($_SESSION['once'])){
   $GLOBALS['appurl'] = '/M183/public';
   $GLOBALS['numAppurlFragments'] = 2;
 $GLOBALS['teilurlnormal']="/normal";
-$GLOBALS['teilurlthumb']="/thumbnails";
 $GLOBALS['urlAllUser']= "/AllUser/";
 
   require_once '../lib/Dispatcher.php';
