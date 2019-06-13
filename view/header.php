@@ -35,7 +35,7 @@
               <li><a href="<?=$GLOBALS['appurl']?>/blog?uid=<?= $uid?>"><?= $_SESSION['user']?></a></li>
               <li><a href="<?=$GLOBALS['appurl']?>/login/logout?uid=<?= $uid?>">Logout</a></li>
               <li><a href="<?=$GLOBALS['appurl']?>/blog?uid=<?= $uid?>">Mein Blog</a></li>
-              <li><a href="<?=$GLOBALS['appurl']?>/kommandos?uid=<?= $uid?>">Kommandos</a></li>
+              <li><a href="<?=$GLOBALS['appurl']?>/kommandos/?uid=<?= $uid?>">Kommandos</a></li>
               <?php } else { ?>
                   <li><a href="<?=$GLOBALS['appurl']?>/login">Login</a></li>
                   <li><a href="<?=$GLOBALS['appurl']?>/login/registration">Registration</a></li>

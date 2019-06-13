@@ -1,32 +1,30 @@
 LOG-Meldungen
-Blog-hinzugefügt 
-   User-Id:7
-   Titel:adsfasdf
-   Datum & Uhrzeit:
-Logout 
-   User: 
-   Id:7
-   Datum & Uhrzeit:
-Registrations-Error 
-   E-Mail:asdf@afasdf.ch
-   Datum & Uhrzeit:
-Registration 
-   User:vithu
-   E-Mail:vithu@vithu.ch
-   Datum & Uhrzeit:
-Login 
-   User: vithu 
-   Id:11
-   Datum & Uhrzeit
-Blog-hinzugefügt 
-   User-Id:11
-   Titel:Hallo Vithu
-   Datum & Uhrzeit:
-Logout 
-   User: 
-   Id:11
-   Datum & Uhrzeit:
+
+ Login-Error 
+   User: lb3
+   Id:2
+ Datum & Uhrzeit:13.06.2019, 14:08
 Login 
    User: lb3 
    Id:2
-   Datum & Uhrzeit
+   Datum & Uhrzeit13.06.2019, 14:08
+Blog-hinzugefügt 
+   User-Id:2
+   Titel:
+   Datum & Uhrzeit:13.06.2019, 14:08
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:13.06.2019, 14:08
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:13.06.2019, 14:08
+ Kommando 
+   User-Id: 2
+   Kommando:ls
+ Datum & Uhrzeit:13.06.2019, 14:09
+Logout 
+   User: 
+   Id:2
+   Datum & Uhrzeit:13.06.2019, 14:09

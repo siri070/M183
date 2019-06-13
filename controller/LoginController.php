@@ -21,7 +21,7 @@ class LoginController
         $view = new View("login_index");
         $view->title = "Login";
         $view->confirm = "";
-        $view->menuTitle = "Bilder-DB";
+        $view->menuTitle = "Modul 183";
         $view->heading = "Login";
         if(isset($_POST['userdata']['email'])&&$_POST['userdata']['username'])
         {
@@ -125,7 +125,8 @@ class LoginController
         //Überprüfung ob das richtige Passwort eingegeben wurde
         if (!(password_verify($_POST['userdata']['passwort'], $user->passwort))) {
             $_SESSION['errors']="Sie haben das falsche Passwort eingegeben.";
-            $InfoLog= "\n Login-Error \n   User: ".$user->nickname."\n   Id:".$user->id."\n Datum & Uhrzeit:";
+            $functions= new Functions();
+            $InfoLog= "\n Login-Error \n   User: ".$user->nickname."\n   Id:".$user->id."\n Datum & Uhrzeit:".$functions->dateAndTime();
             file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         }
         else
@@ -139,15 +140,16 @@ class LoginController
         unset($_SESSION['errors']);
         $_SESSION['uid'] = htmlspecialchars($user->id);
         $_SESSION['user']= htmlspecialchars($user->nickname);
-        $InfoLog= "\nLogin \n   User: ".$user->nickname." \n   Id:".$user->id."\n   Datum & Uhrzeit";
+        $functions= new Functions();
+        $InfoLog= "\nLogin \n   User: ".$user->nickname." \n   Id:".$user->id."\n   Datum & Uhrzeit".$functions->dateAndTime();
         file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         header("Location: ".$GLOBALS['appurl'].'/blog');
     }
 
     //damit sich der User ausloggen kann
     public function logout()
-    {
-        $InfoLog= "\nLogout \n   User: ".$_POST['userdata']['nickname']."\n   Id:".$_SESSION['uid']."\n   Datum & Uhrzeit:";
+    {   $functions= new Functions();
+        $InfoLog= "\nLogout \n   User: ".$_POST['userdata']['nickname']."\n   Id:".$_SESSION['uid']."\n   Datum & Uhrzeit:".$functions->dateAndTime();
         file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         session_unset();
         session_destroy();
@@ -164,7 +166,7 @@ class LoginController
             $view = new View("login_registration");
         $view->confirm = "";
             $view->title = "Registration";
-            $view->menuTitle = "Bilderdatenbak";
+            $view->menuTitle = "Modul 183";
             $view->heading = "Registration";
             if(isset($_POST['userdata']['email'])&&$_POST['userdata']['username'])
             {
@@ -209,7 +211,8 @@ class LoginController
 
                 $loginRepository->create($nickname, $email, $passwort);
                 unset($_SESSION['errors']);
-                $InfoLog= "\nRegistration \n   User:".$nickname."\n   E-Mail:".$email."\n   Datum & Uhrzeit:";
+                $functions= new Functions();
+                $InfoLog= "\nRegistration \n   User:".$nickname."\n   E-Mail:".$email."\n   Datum & Uhrzeit:".$functions->dateAndTime();
                 file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
                 //Weiterleitung zum Login wenn alles funktioniert hat
                 $this->index();
@@ -246,7 +249,8 @@ class LoginController
                 $errorhandling = new Functions();
                 $_POST['userdata']['nickname'] = $nickname;
                 $_POST['userdata']['email'] = $email;
-                $InfoLog= "\nRegistrations-Error \n   E-Mail:".$_POST['userdata']['email']."\n   Datum & Uhrzeit:";
+                $functions= new Functions();
+                $InfoLog= "\nRegistrations-Error \n   E-Mail:".$_POST['userdata']['email']."\n   Datum & Uhrzeit:".$functions->dateAndTime();
                 file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
                 $errorhandling->displayErrors($_SESSION['errors'], "/login/registration", $_POST['userdata']) ;
             }

@@ -10,7 +10,7 @@ class BlogRepository
 {
     protected $tableName ="blog";
 
-    public function createBloGEntry($title, $text, $uid){
+    public function createBlogEntry($title, $text, $uid){
         $query = "INSERT INTO {$this->tableName} (title, text, uid) VALUES ( ?, ?, ?);";
         //Statement vorbereiten
         $statement = ConnectionHandler::getConnection()->prepare($query);

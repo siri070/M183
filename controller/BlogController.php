@@ -8,6 +8,7 @@
     require_once '../controller/LoginController.php';
     require_once '../repository/BlogRepository.php';
     require_once '../lib/Validation.php';
+    require_once '../lib/Functions.php';
 class BlogController
 {
     public function index()
@@ -39,14 +40,15 @@ class BlogController
         $validation = new Validation();
         $blogRepository = new BlogRepository();
         if(isset($_POST['send'])){
-            $_POST['blog']['Titel']= htmlspecialchars($_POST['Titel']);
-            $isBlogTitelOk= $validation->stringLenght(3,50,$_POST['blog']['Titel']);
-            $_POST['blog']['Text'] = htmlspecialchars($_POST['Text']);
-            $isBlogTextOk= $validation->stringLenght(3,500,$_POST['blog']['Text']);
+            $titel= htmlspecialchars($_POST['Titel']);
+            $isBlogTitelOk= $validation->stringLenght(3,50,$titel);
+           $text = htmlspecialchars($_POST['Text']);
+            $isBlogTextOk= $validation->stringLenght(3,500,$text);
 
             if($isBlogTitelOk && $isBlogTextOk){
-              $blogRepository->createBloGEntry($_POST['blog']['Titel'],$_POST['blog']['Text'],$_SESSION['uid']);
-                $InfoLog= "\nBlog-hinzugefügt \n   User-Id:".$_SESSION['uid']."\n   Titel:".$_POST['blog']['Titel']."\n   Datum & Uhrzeit:";
+              $blogRepository->createBlogEntry($titel,$text,$_SESSION['uid']);
+                $functions= new Functions();
+                $InfoLog= "\nBlog-hinzugefügt \n   User-Id:".$_SESSION['uid']."\n   Titel:".$_POST['blog']['Titel']."\n   Datum & Uhrzeit:".$functions->dateAndTime();
                 file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
               $this->index();
             }
