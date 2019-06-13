@@ -141,7 +141,7 @@ class LoginController
         $_SESSION['uid'] = htmlspecialchars($user->id);
         $_SESSION['user']= htmlspecialchars($user->nickname);
         $functions= new Functions();
-        $InfoLog= "\nLogin \n   User: ".$user->nickname." \n   Id:".$user->id."\n   Datum & Uhrzeit".$functions->dateAndTime();
+        $InfoLog= "\nLogin \n   User: ".$user->nickname." \n   Id:".$user->id."\n   Datum & Uhrzeit:".$functions->dateAndTime();
         file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         header("Location: ".$GLOBALS['appurl'].'/blog');
     }

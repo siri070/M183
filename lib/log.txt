@@ -28,3 +28,27 @@ Logout
    User: 
    Id:2
    Datum & Uhrzeit:13.06.2019, 14:09
+Login 
+   User: lb3 
+   Id:2
+   Datum & Uhrzeit:13.06.2019, 14:25
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:13.06.2019, 14:29
+ Kommando 
+   User-Id: 2
+   Kommando:dir
+ Datum & Uhrzeit:13.06.2019, 14:35
+ Kommando 
+   User-Id: 2
+   Kommando:dir
+ Datum & Uhrzeit:13.06.2019, 14:36
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:13.06.2019, 14:36
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:13.06.2019, 14:57

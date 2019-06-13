@@ -10,12 +10,16 @@ class KommandosController
 {
 
     //ToDO Kommandos
+    //ToDO SSL/TLS
+    /** https://www.askingbox.de/tutorial/virtuelle-domains-fuer-apache-xampp-erstellen
+        https://www.askingbox.de/tutorial/xampp-ssl-https-fuer-lokale-projekte-einrichten
+    */
     public function validierung(){
         $functions= new Functions();
         $kommando = htmlspecialchars( $_GET['kommando']);
-        if(strcmp("ls",$kommando)==0){
-        //$_SESSION['output']= shell_exec(escapeshellcmd($kommando));
-          $_SESSION['output']='hat funktioniert';
+        if(strcmp("whoami",$kommando)==0){
+        $_SESSION['output']= shell_exec(escapeshellcmd($kommando));
+         // $_SESSION['output']='hat funktioniert';
             $InfoLog= "\n Kommando \n   User-Id: ".$_SESSION['uid']."\n   Kommando:".$kommando."\n Datum & Uhrzeit:".$functions->dateAndTime();
             file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
         }
