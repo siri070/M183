@@ -52,3 +52,111 @@ Login
    User-Id: 2
    Kommando:whoami
  Datum & Uhrzeit:13.06.2019, 14:57
+Login 
+   User: lb3 
+   Id:2
+   Datum & Uhrzeit:17.06.2019, 09:54
+Login 
+   User: lb3 
+   Id:2
+   Datum & Uhrzeit:17.06.2019, 15:49
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:50
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:55
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:55
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:56
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:56
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:56
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:57
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:
+ Datum & Uhrzeit:17.06.2019, 15:57
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 15:58
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 15:58
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:$
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:$
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:path
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Kommando 
+   User-Id: 2
+   Kommando:path
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:whoami
+ Datum & Uhrzeit:17.06.2019, 16:03
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:echo &quot;hallo&quot;
+ Datum & Uhrzeit:17.06.2019, 16:04
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:echo &quot;hallo&quot;
+ Datum & Uhrzeit:17.06.2019, 16:04
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:echo &quot;hallo&quot;
+ Datum & Uhrzeit:17.06.2019, 16:04
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:echo &quot;hallo&quot;
+ Datum & Uhrzeit:17.06.2019, 16:06
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:echo &quot;hallo&quot;
+ Datum & Uhrzeit:17.06.2019, 16:06
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:asdfasdf
+ Datum & Uhrzeit:17.06.2019, 16:06
+ Unerlaubtes Kommando 
+   User-Id: 2
+   Kommando:asdfasdf
+ Datum & Uhrzeit:17.06.2019, 16:06

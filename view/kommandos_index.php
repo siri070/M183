@@ -1,7 +1,11 @@
 <section class="intro" >
     <div class="introBox">
         <div class="content">
+            <h4>Mögliche kommandos</h4>
+            <p>whoami</p>
+            <p>path</p>
 
+            <p>Geben sie kommando=[das gewünschte kommando] nach dem ? ein.</p>
 
             <?php
             /**
@@ -12,7 +16,10 @@
              */
             $form = new Form($GLOBALS ['appurl']."/kommandos" , null, $confirm);
             if(isset($ergebnis)){
-                echo $form->textarea()->label('Ergebnis')->name('ergebnis')->value($ergebnis);
+                echo "<Label  class=\"control-label\" for=\"textinput\">Ergebnis</Label>";
+
+                echo "<p>$ergebnis</p>";
+
             }
             echo '</form>';
 

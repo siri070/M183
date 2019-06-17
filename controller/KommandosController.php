@@ -8,7 +8,7 @@
 require_once '../lib/Functions.php';
 class KommandosController
 {
-
+    
     //ToDO Kommandos
     //ToDO SSL/TLS
     /** https://www.askingbox.de/tutorial/virtuelle-domains-fuer-apache-xampp-erstellen
@@ -16,18 +16,24 @@ class KommandosController
     */
     public function validierung(){
         $functions= new Functions();
+        /**white list für die Kommandos*/
+        $alleKommandos=["whoami","path"];
         $kommando = htmlspecialchars( $_GET['kommando']);
-        if(strcmp("whoami",$kommando)==0){
-        $_SESSION['output']= shell_exec(escapeshellcmd($kommando));
-         // $_SESSION['output']='hat funktioniert';
-            $InfoLog= "\n Kommando \n   User-Id: ".$_SESSION['uid']."\n   Kommando:".$kommando."\n Datum & Uhrzeit:".$functions->dateAndTime();
-            file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
+        foreach($alleKommandos as $möglichesKommando){
+            if(strcmp($möglichesKommando,$kommando)==0){
+                $_SESSION['output']= shell_exec(escapeshellcmd($kommando));
+                // $_SESSION['output']='hat funktioniert';
+                $InfoLog= "\n Kommando \n   User-Id: ".$_SESSION['uid']."\n   Kommando:".$kommando."\n Datum & Uhrzeit:".$functions->dateAndTime();
+                file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
+            }
+            else{
+                $InfoLog= "\n Unerlaubtes Kommando \n   User-Id: ".$_SESSION['uid']."\n   Kommando:".$kommando."\n Datum & Uhrzeit:".$functions->dateAndTime();
+                file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
+                $_SESSION['output']='Dieses Kommando ist nicht zugelassen.'.$kommando;
+            }
+
         }
-        else{
-            $InfoLog= "\n Unerlaubtes Kommando \n   User-Id: ".$_SESSION['uid']."\n   Kommando:".$kommando."\n Datum & Uhrzeit:".$functions->dateAndTime();
-            file_put_contents("../lib/log.txt",$InfoLog,FILE_APPEND);
-          $_SESSION['output']='Dieses Kommando ist nicht zugelassen.'.$kommando;
-        }
+
     }
 
 

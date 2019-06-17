@@ -22,7 +22,7 @@
       'host' => 'localhost',
       'username' => 'Modul183',
       'password' => 'gibbiX12345!',
-      'database' => 'Modul183',
+      'database' => 'modul183',
     ),
   );
 ?>
