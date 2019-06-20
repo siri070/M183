@@ -17,7 +17,7 @@ class KommandosController
     public function validierung(){
         $functions= new Functions();
         /**white list für die Kommandos*/
-        $alleKommandos=["whoami","path"];
+        $alleKommandos=["path"];
         $kommando = htmlspecialchars( $_GET['kommando']);
         foreach($alleKommandos as $möglichesKommando){
             if(strcmp($möglichesKommando,$kommando)==0){

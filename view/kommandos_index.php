@@ -2,7 +2,6 @@
     <div class="introBox">
         <div class="content">
             <h4>Mögliche kommandos</h4>
-            <p>whoami</p>
             <p>path</p>
 
             <p>Geben sie kommando=[das gewünschte kommando] nach dem ? ein.</p>
